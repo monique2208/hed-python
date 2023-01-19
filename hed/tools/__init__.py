@@ -27,7 +27,7 @@ from .remodeling.operations.factor_column_op import FactorColumnOp
 # from .remodeling.operations.factor_hed_tags_op import FactorHedTagsOp
 from .remodeling.operations.factor_hed_type_op import FactorHedTypeOp
 from .remodeling.operations.merge_consecutive_op import MergeConsecutiveOp
-from .remodeling.operations.number_groups_op import NumberGroupsOp
+from .remodeling.operations.group_by_start_stop_op import GroupByStartStopOp
 from .remodeling.operations.number_rows_op import NumberRowsOp
 from .remodeling.operations import valid_operations
 from .remodeling.operations.remap_columns_op import RemapColumnsOp
