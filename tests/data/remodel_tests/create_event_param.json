@@ -1,0 +1,7 @@
+{
+    "valid_simple": {
+        "target_group": "trial_number",
+        "anchor_column": "event_type",
+        "label": "trial"
+        }
+}

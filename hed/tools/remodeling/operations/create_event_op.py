@@ -1,7 +1,6 @@
 import numpy as np
 import pandas as pd
 from hed.tools.remodeling.operations.base_op import BaseOp
-from hed.tools.remodeling.remodeler_group import RemodelerGroup
 
 
 class CreateEventOp(BaseOp):
@@ -20,9 +19,6 @@ class CreateEventOp(BaseOp):
         super().__init__(self.PARAMS, parameters)
         self.check_parameters(parameters)
         self.target_group = parameters['target_group']
-        if '_rno' not in self.target_group:
-            raise ValueError("InvalidSourceColumn",
-                             "Create event source column must be a remodeler-number-column.")
         self.anchor_column = parameters['anchor_column']
         self.label = parameters['label']
 
@@ -40,31 +36,31 @@ class CreateEventOp(BaseOp):
             Dataframe - a new dataframe after processing.
 
         """
+        
         if self.target_group not in df.columns:
             raise ValueError("MissingInputColumn",
                              f"Column {self.target_group} does not exist in event file {name}")
 
-        number_columns = RemodelerGroup(self.target_group, df)
-
         df_new = df.copy()
+
+        number_groups = df_new.groupby(self.target_group)
+        group_indexes = number_groups.groups.values()
+        group_indexes_to_list = [list(x) for x in list(group_indexes)]
+        
+        
 
         if self.anchor_column not in df.columns:
             df_new[self.anchor_column] = np.nan
 
-        for ind, sublist in enumerate(number_columns.indexes):
+        for ind, sublist in enumerate(group_indexes_to_list):
             onset = df_new.loc[sublist[0], 'onset']
             duration = ((df_new.loc[sublist[-1], 'onset'] - df_new.loc[sublist[0], 'onset'])
                         + df_new.loc[sublist[-1], 'duration'])
-
-            copy_columns = [x.name for x in number_columns.layers]
 
             line = pd.DataFrame([np.repeat(np.nan, len(df_new.columns))],
                                 columns=df_new.columns, index=[sublist[0] - 0.5])
             line['onset'] = onset
             line['duration'] = duration
-
-            for column in copy_columns:
-                line[column] = df_new.loc[sublist[0], column]
 
             line[self.anchor_column] = self.label
 
