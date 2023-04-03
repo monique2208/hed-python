@@ -66,7 +66,7 @@ class GroupByStartStopOp(BaseOp):
 
         """
         # check if number column exists and if so, check overwrite setting
-        group_column = self.group_name + '_rno'
+        group_column = self.group_name
 
         if group_column in df.columns:
             if self.overwrite is False:
@@ -100,9 +100,12 @@ class GroupByStartStopOp(BaseOp):
         df_new[group_column] = np.nan
 
         # find group indices
-        indices = tuple_to_range(
-            get_indices(df, self.source_column, self.start['values'], self.stop['values']),
-            [self.start['inclusion'], self.stop['inclusion']])
+        indices = tuple_to_range(get_indices(df, 
+                                             self.source_column, 
+                                             self.start['values'], 
+                                             self.stop['values']),
+                                             [self.start['inclusion'],self.stop['inclusion']])
+        
         for i, group in enumerate(indices):
             df_new.loc[group, group_column] = i + 1
 

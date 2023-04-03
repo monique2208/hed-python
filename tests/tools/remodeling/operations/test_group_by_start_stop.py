@@ -43,7 +43,7 @@ class Test(unittest.TestCase):
                            ]
 
         cls.sample_columns = ["onset", "duration", "code"]
-        cls.existing_sample_columns = ["onset", "duration", "number_rno"]
+        cls.existing_sample_columns = ["onset", "duration", "number"]
 
         cls.numbered_data = [[33.4228, 2.0084, "80", "n/a"],
                              [36.9395, 0.5, "40", "n/a"],
@@ -74,7 +74,7 @@ class Test(unittest.TestCase):
                              [366.5186, 2.0084, "Stress_post", "n/a"]
                              ]
 
-        cls.numbered_columns = ["onset", "duration", "code", "number_rno"]
+        cls.numbered_columns = ["onset", "duration", "code", "number"]
 
         cls.overwritten_data = [[33.4228, 2.0084, "n/a"],
                                 [36.9395, 0.5, "n/a"],
@@ -114,17 +114,17 @@ class Test(unittest.TestCase):
 
         overwrite_false_parameters = deepcopy(base_parameters)
         overwrite_false_parameters['overwrite'] = False
-        overwrite_false_parameters['source_column'] = 'number_rno'
+        overwrite_false_parameters['source_column'] = 'number'
 
         overwrite_true_parms = deepcopy(base_parameters)
         overwrite_true_parms['overwrite'] = True
-        overwrite_true_parms['source_column'] = 'number_rno'
+        overwrite_true_parms['source_column'] = 'number'
 
         missing_startstop_parms = deepcopy(base_parameters)
         missing_startstop_parms["start"] = {"values": ["40"]}
 
         wrong_startstop_parms = deepcopy(base_parameters)
-        wrong_startstop_parms["stop"]['column'] = "number_rno"
+        wrong_startstop_parms["stop"]['column'] = "number"
 
         wrong_startstop_type_parms = deepcopy(base_parameters)
         wrong_startstop_type_parms["start"]['values'] = "40"
@@ -165,7 +165,7 @@ class Test(unittest.TestCase):
                         "numbered_events should have the expected columns")
         self.assertTrue(len(df_new) == len(df_test),
                         "numbered_events should have same length as original dataframe")
-        self.assertTrue(np.nanmax(df_new["number_rno"]) == 5.0,
+        self.assertTrue(np.nanmax(df_new["number"]) == 5.0,
                         "max value in numbered_events should match the number of groups")
 
         # fill na to match postprocessing dispatcher
@@ -192,7 +192,7 @@ class Test(unittest.TestCase):
                         "numbered_events should have the same columns as original dataframe in case of overwrite")
         self.assertTrue(len(df_new) == len(df_test),
                         "numbered_events should have same length as original dataframe")
-        self.assertTrue(np.nanmax(df_new["number_rno"]) == 5.0,
+        self.assertTrue(np.nanmax(df_new["number"]) == 5.0,
                         "max value in numbered_events should match the number of groups")
         df_new = df_new.fillna('n/a')
         self.assertTrue(np.array_equal(df_new.to_numpy(), df_check.to_numpy()),
