@@ -14,7 +14,7 @@ class GroupByStartStopOp(BaseOp):
             "start": dict,
             "stop": dict
         },
-        "optional_parameters": {"overwrite": bool, "exclude_values": list, "start_at_beginning": bool,
+        "optional_parameters": {"overwrite": bool, "exclude_values": list, "start_at_start": bool,
                                 "end_at_end": bool}
     }
 
