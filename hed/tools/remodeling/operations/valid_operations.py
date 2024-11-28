@@ -1,8 +1,10 @@
 """ The valid operations for the remodeling tools. """
 
+from hed.tools.remodeling.operations.extend_columns_op import ExtendColumnsOp
 from hed.tools.remodeling.operations.factor_column_op import FactorColumnOp
 from hed.tools.remodeling.operations.factor_hed_tags_op import FactorHedTagsOp
 from hed.tools.remodeling.operations.factor_hed_type_op import FactorHedTypeOp
+from hed.tools.remodeling.operations.merge_columns_op import MergeColumnsOp
 from hed.tools.remodeling.operations.merge_consecutive_op import MergeConsecutiveOp
 from hed.tools.remodeling.operations.number_rows_op import NumberRowsOp
 from hed.tools.remodeling.operations.number_groups_op import NumberGroupsOp
@@ -11,6 +13,8 @@ from hed.tools.remodeling.operations.reorder_columns_op import ReorderColumnsOp
 from hed.tools.remodeling.operations.remap_columns_op import RemapColumnsOp
 from hed.tools.remodeling.operations.remove_rows_op import RemoveRowsOp
 from hed.tools.remodeling.operations.rename_columns_op import RenameColumnsOp
+from hed.tools.remodeling.operations.remap_values_op import RemapValuesOp
+from hed.tools.remodeling.operations.replace_string_op import ReplaceStringOp
 from hed.tools.remodeling.operations.split_rows_op import SplitRowsOp
 from hed.tools.remodeling.operations.summarize_column_names_op import SummarizeColumnNamesOp
 from hed.tools.remodeling.operations.summarize_column_values_op import SummarizeColumnValuesOp
@@ -19,12 +23,17 @@ from hed.tools.remodeling.operations.summarize_sidecar_from_events_op import Sum
 from hed.tools.remodeling.operations.summarize_hed_type_op import SummarizeHedTypeOp
 from hed.tools.remodeling.operations.summarize_hed_tags_op import SummarizeHedTagsOp
 from hed.tools.remodeling.operations.summarize_hed_validation_op import SummarizeHedValidationOp
+from hed.tools.remodeling.operations.delimiter_split_op import DelimiterSplitOp
+from hed.tools.remodeling.operations.split_by_column_op import SplitByColumnOp
+from hed.tools.remodeling.operations.label_response_op import LabelResponseOp
 
 valid_operations = {
     # 'convert_columns': ConvertColumnsOp,
+    'extend_column': ExtendColumnsOp,
     'factor_column': FactorColumnOp,
     'factor_hed_tags': FactorHedTagsOp,
     'factor_hed_type': FactorHedTypeOp,
+    "merge_columns": MergeColumnsOp,
     'merge_consecutive': MergeConsecutiveOp,
     'number_groups': NumberGroupsOp,
     'number_rows': NumberRowsOp,
@@ -33,6 +42,8 @@ valid_operations = {
     'remove_rows': RemoveRowsOp,
     'rename_columns': RenameColumnsOp,
     'reorder_columns': ReorderColumnsOp,
+    'remap_values': RemapValuesOp,
+    'replace_string': ReplaceStringOp,
     'split_rows': SplitRowsOp,
     'summarize_column_names': SummarizeColumnNamesOp,
     'summarize_column_values': SummarizeColumnValuesOp,
@@ -40,5 +51,8 @@ valid_operations = {
     'summarize_hed_tags': SummarizeHedTagsOp,
     'summarize_hed_type': SummarizeHedTypeOp,
     'summarize_hed_validation': SummarizeHedValidationOp,
-    'summarize_sidecar_from_events': SummarizeSidecarFromEventsOp
+    'summarize_sidecar_from_events': SummarizeSidecarFromEventsOp,
+    'delimiter_split': DelimiterSplitOp,
+    'split_by_column': SplitByColumnOp,
+    'label_response': LabelResponseOp
 }
